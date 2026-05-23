@@ -1,0 +1,7 @@
+{
+  "name": "saas-tarefas",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "echo Site pronto"
+  }
+}
