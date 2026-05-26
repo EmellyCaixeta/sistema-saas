@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Tarefas</title>
+    <title>Minhas Tarefas</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- LOGIN -->
     <div class="login-container" id="loginContainer">
         <div class="login-box">
 
             <h1>Login</h1>
 
             <input type="text" id="usuario" placeholder="Usuário">
-
             <input type="password" id="senha" placeholder="Senha">
 
             <button onclick="fazerLogin()">Entrar</button>
-
             <button onclick="mostrarCadastro()">Criar conta</button>
 
             <p id="mensagemErro"></p>
@@ -27,41 +26,58 @@
         </div>
     </div>
 
+    <!-- CADASTRO -->
     <div class="login-container" id="cadastroContainer" style="display:none;">
         <div class="login-box">
 
             <h1>Cadastro</h1>
 
             <input type="text" id="novoUsuario" placeholder="Novo usuário">
-
             <input type="password" id="novaSenha" placeholder="Nova senha">
 
             <button onclick="fazerCadastro()">Cadastrar</button>
-
-            <button onclick="voltarLogin()">Voltar para Login</button>
+            <button onclick="voltarLogin()">Voltar</button>
 
             <p id="mensagemCadastro"></p>
 
         </div>
     </div>
 
+    <!-- SISTEMA -->
     <div class="container" id="sistemaTarefas" style="display:none;">
 
-        <h1>Sistema de Tarefas</h1>
+        <h1>Minhas Tarefas</h1>
 
+        <!-- DASHBOARD -->
+        <div class="dashboard">
+
+            <div class="card">
+                <h3>Hoje</h3>
+                <p id="totalHoje">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Concluídas</h3>
+                <p id="concluidas">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Progresso</h3>
+                <p id="progresso">0%</p>
+            </div>
+
+        </div>
+
+        <!-- INPUT -->
         <div class="input-area">
 
             <input type="text" id="tarefa" placeholder="Digite uma tarefa">
 
-            <button onclick="adicionarTarefa()">
-                Adicionar
-            </button>
+            <button onclick="adicionarTarefa()">Adicionar</button>
 
         </div>
 
-        <button class="btn-sair" onclick="sair()">
-            Sair
-        </button>
+        <button class="btn-sair" onclick="sair()">Sair</button>
 
         <ul id="lista"></ul>
 

@@ -1,214 +1,148 @@
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 
+function salvar(){
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
+/* LOGIN */
 function fazerLogin(){
 
     let usuario = document.getElementById("usuario").value;
-
     let senha = document.getElementById("senha").value;
 
-    let mensagemErro = document.getElementById("mensagemErro");
+    let encontrado = usuarios.find(u =>
+        u.usuario === usuario && u.senha === senha
+    );
 
-    let usuarioEncontrado = usuarios.find(function(user){
-
-        return user.usuario === usuario && user.senha === senha;
-    });
-
-    if(usuarioEncontrado){
-
+    if(encontrado){
         document.getElementById("loginContainer").style.display = "none";
-
-        document.getElementById("cadastroContainer").style.display = "none";
-
         document.getElementById("sistemaTarefas").style.display = "block";
-
-        localStorage.setItem("usuarioLogado", "true");
-
+        localStorage.setItem("logado", "true");
+        mostrarTarefas();
     }else{
-
-        mensagemErro.innerText = "Usuário ou senha inválidos!";
+        document.getElementById("mensagemErro").innerText = "Login inválido!";
     }
 }
 
+/* CADASTRO */
 function mostrarCadastro(){
-
     document.getElementById("loginContainer").style.display = "none";
-
     document.getElementById("cadastroContainer").style.display = "flex";
 }
 
 function voltarLogin(){
-
     document.getElementById("cadastroContainer").style.display = "none";
-
     document.getElementById("loginContainer").style.display = "flex";
 }
 
 function fazerCadastro(){
 
-    let novoUsuario = document.getElementById("novoUsuario").value;
+    let u = document.getElementById("novoUsuario").value;
+    let s = document.getElementById("novaSenha").value;
 
-    let novaSenha = document.getElementById("novaSenha").value;
-
-    let mensagemCadastro = document.getElementById("mensagemCadastro");
-
-    if(novoUsuario === "" || novaSenha === ""){
-
-        mensagemCadastro.innerText = "Preencha todos os campos!";
-
+    if(!u || !s){
+        document.getElementById("mensagemCadastro").innerText = "Preencha tudo!";
         return;
     }
 
-    let usuarioExistente = usuarios.find(function(user){
-
-        return user.usuario === novoUsuario;
-    });
-
-    if(usuarioExistente){
-
-        mensagemCadastro.innerText = "Usuário já existe!";
-
-        return;
-    }
-
-    usuarios.push({
-
-        usuario: novoUsuario,
-        senha: novaSenha
-    });
-
+    usuarios.push({usuario:u, senha:s});
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    mensagemCadastro.innerText = "Cadastro realizado com sucesso!";
+    document.getElementById("mensagemCadastro").innerText = "Conta criada!";
 
-    setTimeout(function(){
-
-        voltarLogin();
-
-    }, 1500);
+    setTimeout(voltarLogin, 1200);
 }
 
+/* SAIR */
 function sair(){
-
-    localStorage.removeItem("usuarioLogado");
-
+    localStorage.removeItem("logado");
     location.reload();
 }
 
-if(localStorage.getItem("usuarioLogado") === "true"){
-
-    window.onload = function(){
-
-        document.getElementById("loginContainer").style.display = "none";
-
-        document.getElementById("cadastroContainer").style.display = "none";
-
-        document.getElementById("sistemaTarefas").style.display = "block";
-
-        mostrarTarefas();
-    }
-
-}else{
-
-    window.onload = function(){
-
-        mostrarTarefas();
-    }
-}
-
-function salvarLocalStorage(){
-
-    localStorage.setItem("tarefas", JSON.stringify(tarefas));
-}
-
+/* TAREFAS */
 function adicionarTarefa(){
 
     let input = document.getElementById("tarefa");
+    let texto = input.value.trim();
 
-    let texto = input.value;
-
-    if(texto === ""){
-
-        alert("Digite uma tarefa");
-
-        return;
-    }
+    if(!texto) return;
 
     tarefas.push({
-
-        texto:texto,
+        texto,
         concluida:false
     });
 
-    salvarLocalStorage();
-
-    mostrarTarefas();
-
     input.value = "";
+    salvar();
+    mostrarTarefas();
 }
 
+/* DASHBOARD + LISTA */
 function mostrarTarefas(){
 
     let lista = document.getElementById("lista");
-
     lista.innerHTML = "";
 
-    tarefas.forEach(function(tarefa,index){
+    let total = tarefas.length;
+    let feitas = tarefas.filter(t => t.concluida).length;
+
+    document.getElementById("totalHoje").innerText = total;
+    document.getElementById("concluidas").innerText = feitas;
+
+    let porcentagem = total === 0 ? 0 : Math.round((feitas / total) * 100);
+    document.getElementById("progresso").innerText = porcentagem + "%";
+
+    tarefas.forEach((tarefa, index) => {
 
         let li = document.createElement("li");
 
         let span = document.createElement("span");
-
         span.innerText = tarefa.texto;
 
         if(tarefa.concluida){
-
             span.classList.add("concluida");
         }
 
-        let divAcoes = document.createElement("div");
+        let div = document.createElement("div");
+        div.classList.add("acoes");
 
-        divAcoes.classList.add("acoes");
+        let btnOk = document.createElement("button");
+        btnOk.innerText = "✓";
+        btnOk.classList.add("btn-concluir");
 
-        let btnConcluir = document.createElement("button");
-
-        btnConcluir.innerText = "✓";
-
-        btnConcluir.classList.add("btn-concluir");
-
-        btnConcluir.onclick = function(){
-
+        btnOk.onclick = function(){
             tarefas[index].concluida = !tarefas[index].concluida;
-
-            salvarLocalStorage();
-
+            salvar();
             mostrarTarefas();
         };
 
-        let btnRemover = document.createElement("button");
+        let btnDel = document.createElement("button");
+        btnDel.innerText = "X";
+        btnDel.classList.add("btn-remover");
 
-        btnRemover.innerText = "X";
-
-        btnRemover.classList.add("btn-remover");
-
-        btnRemover.onclick = function(){
-
+        btnDel.onclick = function(){
             tarefas.splice(index,1);
-
-            salvarLocalStorage();
-
+            salvar();
             mostrarTarefas();
         };
 
-        divAcoes.appendChild(btnConcluir);
-
-        divAcoes.appendChild(btnRemover);
+        div.appendChild(btnOk);
+        div.appendChild(btnDel);
 
         li.appendChild(span);
-
-        li.appendChild(divAcoes);
+        li.appendChild(div);
 
         lista.appendChild(li);
     });
 }
+
+/* AUTO LOGIN */
+window.onload = function(){
+    if(localStorage.getItem("logado") === "true"){
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("sistemaTarefas").style.display = "block";
+    }
+
+    mostrarTarefas();
+};
