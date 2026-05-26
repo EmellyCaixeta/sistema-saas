@@ -3,23 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarefas</title>
+    <title>Sistema de Tarefas</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+
+            <h1>Login</h1>
+
+            <input type="text" id="usuario" placeholder="Usuário">
+
+            <input type="password" id="senha" placeholder="Senha">
+
+            <button onclick="fazerLogin()">Entrar</button>
+
+            <button onclick="mostrarCadastro()">Criar conta</button>
+
+            <p id="mensagemErro"></p>
+
+        </div>
+    </div>
+
+    <div class="login-container" id="cadastroContainer" style="display:none;">
+        <div class="login-box">
+
+            <h1>Cadastro</h1>
+
+            <input type="text" id="novoUsuario" placeholder="Novo usuário">
+
+            <input type="password" id="novaSenha" placeholder="Nova senha">
+
+            <button onclick="fazerCadastro()">Cadastrar</button>
+
+            <button onclick="voltarLogin()">Voltar para Login</button>
+
+            <p id="mensagemCadastro"></p>
+
+        </div>
+    </div>
+
+    <div class="container" id="sistemaTarefas" style="display:none;">
 
         <h1>Sistema de Tarefas</h1>
 
         <div class="input-area">
+
             <input type="text" id="tarefa" placeholder="Digite uma tarefa">
 
             <button onclick="adicionarTarefa()">
                 Adicionar
             </button>
+
         </div>
+
+        <button class="btn-sair" onclick="sair()">
+            Sair
+        </button>
 
         <ul id="lista"></ul>
 

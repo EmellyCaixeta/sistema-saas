@@ -15,10 +15,13 @@ body{
     align-items:center;
 
     background: linear-gradient(135deg, #667eea, #764ba2);
+
     padding:20px;
 }
 
-.container{
+.container,
+.login-box{
+
     width:100%;
     max-width:550px;
 
@@ -32,26 +35,41 @@ body{
 
     padding:35px;
 
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+.login-container{
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 h1{
+
     text-align:center;
+
     color:white;
 
     margin-bottom:30px;
 
     font-size:32px;
-    font-weight:700;
 }
 
-.input-area{
+.login-box{
+
     display:flex;
-    gap:12px;
+
+    flex-direction:column;
+
+    gap:15px;
 }
 
 input{
-    flex:1;
+
+    width:100%;
 
     padding:15px;
 
@@ -62,15 +80,17 @@ input{
     outline:none;
 
     font-size:16px;
-
-    background:white;
 }
 
-input::placeholder{
-    color:#888;
+.input-area{
+
+    display:flex;
+
+    gap:12px;
 }
 
 button{
+
     border:none;
 
     border-radius:14px;
@@ -81,25 +101,35 @@ button{
 
     transition:0.3s;
 
-    font-family:'Montserrat', sans-serif;
+    font-size:15px;
 
     font-weight:600;
-}
 
-button:hover{
-    transform:scale(1.05);
-}
-
-.input-area button{
     background:#00e5a8;
+
     color:#222;
 }
 
+button:hover{
+
+    transform:scale(1.05);
+}
+
+#mensagemErro,
+#mensagemCadastro{
+
+    color:#ffb3b3;
+
+    text-align:center;
+}
+
 ul{
+
     margin-top:30px;
 }
 
 li{
+
     list-style:none;
 
     background:white;
@@ -111,66 +141,64 @@ li{
     margin-bottom:15px;
 
     display:flex;
-    justify-content:space-between;
-    align-items:center;
 
-    animation: aparecer 0.3s ease;
+    justify-content:space-between;
+
+    align-items:center;
 
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
-@keyframes aparecer{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
 span{
+
     font-size:16px;
-    font-weight:500;
+
     color:#333;
 }
 
 .concluida{
-    text-decoration: line-through;
+
+    text-decoration:line-through;
+
     opacity:0.6;
 }
 
 .acoes{
+
     display:flex;
+
     gap:10px;
 }
 
 .btn-concluir{
+
     background:#00c853;
+
     color:white;
 
     width:45px;
-    height:45px;
 
-    border-radius:12px;
+    height:45px;
 }
 
 .btn-remover{
+
     background:#ff5252;
+
     color:white;
 
     width:45px;
+
     height:45px;
-
-    border-radius:12px;
 }
 
-.btn-concluir:hover{
-    background:#00b248;
-}
+.btn-sair{
 
-.btn-remover:hover{
-    background:#ff3030;
+    width:100%;
+
+    margin-top:20px;
+
+    background:#ff5252;
+
+    color:white;
 }
