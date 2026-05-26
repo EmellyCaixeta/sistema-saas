@@ -156,3 +156,101 @@ span{
     background:#ff5252;
     color:white;
 }
+
+/* CRÉDITOS RGB */
+
+.creditos{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+    width:100%;
+}
+
+.creditos p{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    color:white;
+
+    padding:12px 22px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(10px);
+
+    white-space:nowrap;
+
+    animation:rgbGlow 4s linear infinite;
+
+    box-shadow:
+    0 0 10px rgba(255,0,0,0.7),
+    0 0 20px rgba(0,255,0,0.7),
+    0 0 30px rgba(0,0,255,0.7);
+}
+
+@keyframes rgbGlow{
+
+    0%{
+
+        text-shadow:
+        0 0 5px red,
+        0 0 10px red;
+
+        box-shadow:
+        0 0 10px red,
+        0 0 20px red;
+    }
+
+    33%{
+
+        text-shadow:
+        0 0 5px lime,
+        0 0 10px lime;
+
+        box-shadow:
+        0 0 10px lime,
+        0 0 20px lime;
+    }
+
+    66%{
+
+        text-shadow:
+        0 0 5px blue,
+        0 0 10px blue;
+
+        box-shadow:
+        0 0 10px blue,
+        0 0 20px blue;
+    }
+
+    100%{
+
+        text-shadow:
+        0 0 5px red,
+        0 0 10px red;
+
+        box-shadow:
+        0 0 10px red,
+        0 0 20px red;
+    }
+}
