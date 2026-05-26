@@ -182,7 +182,7 @@ span{
 
 .creditos p{
 
-    font-size:14px;
+    font-size:13px;
 
     font-weight:700;
 
@@ -190,15 +190,13 @@ span{
 
     color:white;
 
-    padding:12px 22px;
+    padding:10px 16px;
 
-    border-radius:20px;
+    border-radius:18px;
 
     background:rgba(255,255,255,0.08);
 
     backdrop-filter:blur(10px);
-
-    white-space:nowrap;
 
     animation:rgbGlow 4s linear infinite;
 
@@ -206,6 +204,14 @@ span{
     0 0 10px rgba(255,0,0,0.7),
     0 0 20px rgba(0,255,0,0.7),
     0 0 30px rgba(0,0,255,0.7);
+
+    max-width:90vw;
+
+    line-height:1.5;
+
+    word-break:break-word;
+
+    white-space:normal;
 }
 
 @keyframes rgbGlow{
@@ -252,5 +258,29 @@ span{
         box-shadow:
         0 0 10px red,
         0 0 20px red;
+    }
+}
+
+/* RESPONSIVO */
+
+@media(max-width:600px){
+
+    .creditos{
+
+        bottom:10px;
+
+        padding:0 10px;
+    }
+
+    .creditos p{
+
+        font-size:12px;
+
+        width:100%;
+    }
+
+    body{
+
+        padding-bottom:90px;
     }
 }
